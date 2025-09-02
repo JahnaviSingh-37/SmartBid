@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#3b82f6" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="SmartBid Marketplace - AI-powered fintech auction platform with intelligent bidding, image search, and personalized recommendations" />
+    <meta name="keywords" content="auction, fintech, AI, bidding, marketplace, smart contracts, blockchain, real-time" />
+    <meta name="author" content="SmartBid Team" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="SmartBid Marketplace - AI-Powered Auctions" />
+    <meta property="og:description" content="Intelligent bidding platform with image search, price alerts, and personalized recommendations" />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    <meta property="og:url" content="https://smartbid-marketplace.com" />
+    <meta property="og:site_name" content="SmartBid Marketplace" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SmartBid Marketplace - AI-Powered Auctions" />
+    <meta name="twitter:description" content="Intelligent bidding platform with image search, price alerts, and personalized recommendations" />
+    <meta name="twitter:image" content="%PUBLIC_URL%/twitter-card.png" />
+    <meta name="twitter:site" content="@SmartBidMarket" />
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- Title -->
+    <title>SmartBid Marketplace - AI-Powered Auction Platform</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="%PUBLIC_URL%/logo.svg" as="image" type="image/svg+xml" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' wss: ws: https://api.stripe.com;" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    
+    <!-- Performance Optimization -->
+    <link rel="dns-prefetch" href="//api.smartbid.com" />
+    <link rel="dns-prefetch" href="//js.stripe.com" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  </head>
+  
+  <body class="font-sans antialiased bg-gray-50">
+    <noscript>
+      <div class="flex items-center justify-center min-h-screen bg-gray-100">
+        <div class="text-center p-8 bg-white rounded-lg shadow-md max-w-md">
+          <h1 class="text-2xl font-bold text-gray-800 mb-4">JavaScript Required</h1>
+          <p class="text-gray-600 mb-4">You need to enable JavaScript to run SmartBid Marketplace.</p>
+          <p class="text-sm text-gray-500">Please enable JavaScript in your browser settings and refresh the page.</p>
+        </div>
+      </div>
+    </noscript>
+    
+    <!-- Loading Skeleton -->
+    <div id="initial-loader" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+      <div class="text-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">SmartBid</h2>
+        <p class="text-gray-600">Loading your marketplace...</p>
+      </div>
+    </div>
+    
+    <!-- React Root -->
+    <div id="root"></div>
+    
+    <!-- Remove initial loader when React mounts -->
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          const loader = document.getElementById('initial-loader');
+          if (loader && window.React) {
+            loader.style.display = 'none';
+          }
+        }, 100);
+      });
+    </script>
+    
+    <!-- Analytics (add your tracking code) -->
+    <!-- Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
+    <!-- <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script> -->
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            }).catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

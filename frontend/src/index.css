@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Global Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom Component Styles */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
+  }
+  
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-secondary-100 text-secondary-900 hover:bg-secondary-200 active:bg-secondary-300;
+  }
+  
+  .btn-success {
+    @apply btn bg-success-600 text-white hover:bg-success-700 active:bg-success-800;
+  }
+  
+  .btn-warning {
+    @apply btn bg-warning-500 text-white hover:bg-warning-600 active:bg-warning-700;
+  }
+  
+  .btn-danger {
+    @apply btn bg-danger-600 text-white hover:bg-danger-700 active:bg-danger-800;
+  }
+  
+  .btn-outline {
+    @apply btn border border-input hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .btn-ghost {
+    @apply btn hover:bg-accent hover:text-accent-foreground;
+  }
+  
+  .btn-link {
+    @apply btn underline-offset-4 hover:underline text-primary-600;
+  }
+  
+  .btn-sm {
+    @apply h-9 px-3 text-xs;
+  }
+  
+  .btn-md {
+    @apply h-10 px-4 py-2;
+  }
+  
+  .btn-lg {
+    @apply h-11 px-8;
+  }
+  
+  .btn-xl {
+    @apply h-12 px-10 text-base;
+  }
+  
+  .card {
+    @apply rounded-lg border bg-white shadow-sm;
+  }
+  
+  .card-hover {
+    @apply card transition-all duration-200 hover:shadow-md hover:scale-[1.02];
+  }
+  
+  .input {
+    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  .label {
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  }
+  
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+  
+  .badge-primary {
+    @apply badge bg-primary-100 text-primary-800 hover:bg-primary-200;
+  }
+  
+  .badge-secondary {
+    @apply badge bg-secondary-100 text-secondary-800 hover:bg-secondary-200;
+  }
+  
+  .badge-success {
+    @apply badge bg-success-100 text-success-800 hover:bg-success-200;
+  }
+  
+  .badge-warning {
+    @apply badge bg-warning-100 text-warning-800 hover:bg-warning-200;
+  }
+  
+  .badge-danger {
+    @apply badge bg-danger-100 text-danger-800 hover:bg-danger-200;
+  }
+  
+  .loading-spinner {
+    @apply animate-spin rounded-full border-2 border-gray-300 border-t-primary-600;
+  }
+  
+  .auction-card {
+    @apply card-hover p-6 space-y-4;
+  }
+  
+  .auction-image {
+    @apply aspect-video w-full rounded-lg object-cover;
+  }
+  
+  .bid-button {
+    @apply btn-primary w-full font-semibold tracking-wide;
+  }
+  
+  .price-display {
+    @apply text-2xl font-bold text-primary-600;
+  }
+  
+  .time-remaining {
+    @apply text-sm font-medium text-warning-600 bg-warning-50 px-2 py-1 rounded-full;
+  }
+  
+  .credit-score-excellent {
+    @apply text-success-600 bg-success-50;
+  }
+  
+  .credit-score-good {
+    @apply text-primary-600 bg-primary-50;
+  }
+  
+  .credit-score-fair {
+    @apply text-warning-600 bg-warning-50;
+  }
+  
+  .credit-score-poor {
+    @apply text-danger-600 bg-danger-50;
+  }
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-sm bg-white/80 border border-white/20;
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulseGlow 2s infinite;
+  }
+  
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    }
+  }
+  
+  /* Bid status indicators */
+  .bid-winning {
+    @apply bg-success-50 border-success-200 text-success-800;
+  }
+  
+  .bid-outbid {
+    @apply bg-danger-50 border-danger-200 text-danger-800;
+  }
+  
+  .bid-pending {
+    @apply bg-warning-50 border-warning-200 text-warning-800;
+  }
+  
+  /* Auction status indicators */
+  .auction-active {
+    @apply bg-success-100 text-success-800 border border-success-200;
+  }
+  
+  .auction-ended {
+    @apply bg-gray-100 text-gray-800 border border-gray-200;
+  }
+  
+  .auction-upcoming {
+    @apply bg-primary-100 text-primary-800 border border-primary-200;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .btn {
+    @apply border-2 border-current;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
