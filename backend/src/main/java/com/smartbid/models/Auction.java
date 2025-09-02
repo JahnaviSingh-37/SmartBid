@@ -187,6 +187,11 @@ public class Auction {
                (currentPrice != null && currentPrice.compareTo(reservePrice) >= 0);
     }
 
+    public boolean isReserveMet() {
+        if (reservePrice == null) return true;
+        return currentPrice != null && currentPrice.compareTo(reservePrice) >= 0;
+    }
+
     public BigDecimal getMinimumNextBid() {
         if (currentPrice == null) {
             return startingPrice;
@@ -290,6 +295,10 @@ public class Auction {
 
     public User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
+
+    // Convenience methods for controller compatibility
+    public User getSeller() { return getUser(); }
+    public void setSeller(User seller) { setUser(seller); }
 
     public Set<Bid> getBids() { return bids; }
     public void setBids(Set<Bid> bids) { this.bids = bids; }

@@ -56,6 +56,9 @@ public class Bid {
     @Column(name = "bid_pattern_score", precision = 3, scale = 2)
     private BigDecimal bidPatternScore; // Pattern analysis score
 
+    @Column(name = "notes", columnDefinition = "TEXT")
+    private String notes; // Additional notes for the bid
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -84,7 +87,7 @@ public class Bid {
     }
 
     public enum BidType {
-        MANUAL, AUTOMATIC, BUY_NOW
+        MANUAL, AUTOMATIC, PROXY, BUY_NOW
     }
 
     // Business Methods
@@ -155,6 +158,13 @@ public class Bid {
 
     public Auction getAuction() { return auction; }
     public void setAuction(Auction auction) { this.auction = auction; }
+
+    public String getNotes() { return notes; }
+    public void setNotes(String notes) { this.notes = notes; }
+
+    // Convenience methods for service compatibility
+    public User getUser() { return getBidder(); }
+    public void setUser(User user) { setBidder(user); }
 
     @Override
     public String toString() {

@@ -249,6 +249,65 @@ public class UserService implements UserDetailsService {
     }
 
     /**
+     * Update user bidding statistics
+     */
+    public void updateBiddingStatistics(Long userId, BigDecimal bidAmount, boolean isSuccessful) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("User not found");
+        }
+
+        User user = userOpt.get();
+        
+        // Update total bid amount
+        if (user.getTotalBidAmount() == null) {
+            user.setTotalBidAmount(bidAmount);
+        } else {
+            user.setTotalBidAmount(user.getTotalBidAmount().add(bidAmount));
+        }
+
+        // Update transaction counts
+        if (isSuccessful) {
+            user.setSuccessfulTransactions(user.getSuccessfulTransactions() + 1);
+        }
+
+        // Recalculate credit score based on bidding activity
+        user.updateCreditScore();
+        userRepository.save(user);
+    }
+
+    /**
+     * Penalize user for bid retraction
+     */
+    public void penalizeForBidRetraction(Long userId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()) {
+            throw new RuntimeException("User not found");
+        }
+
+        User user = userOpt.get();
+        
+        // Increase failed transactions count
+        user.setFailedTransactions(user.getFailedTransactions() + 1);
+        
+        // Apply additional penalty to credit score
+        BigDecimal currentScore = user.getCreditScore();
+        BigDecimal penalty = BigDecimal.valueOf(20.0); // 20 point penalty
+        BigDecimal newScore = currentScore.subtract(penalty);
+        
+        // Ensure score doesn't go below minimum
+        if (newScore.compareTo(BigDecimal.valueOf(100.0)) < 0) {
+            newScore = BigDecimal.valueOf(100.0);
+        }
+        
+        user.setCreditScore(newScore);
+        userRepository.save(user);
+        
+        // Send penalty notification
+        emailService.sendBidRetractionPenaltyEmail(user);
+    }
+
+    /**
      * Spring Security UserDetailsService implementation
      */
     @Override
